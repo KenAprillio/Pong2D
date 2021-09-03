@@ -19,4 +19,15 @@ public class BallController : MonoBehaviour
     {
         
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.name == "Pemukul1" || collision.gameObject.name == ("Pemukul2"))
+        {
+            float sudut = (transform.position.y - collision.transform.position.y)*5f;
+            Vector2 arah = new Vector2(rigid.velocity.x, sudut).normalized;
+            rigid.velocity = new Vector2(0, 0);
+            rigid.AddForce(arah * force * 2);
+        }
+    }
 }
