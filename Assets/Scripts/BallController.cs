@@ -10,9 +10,14 @@ public class BallController : MonoBehaviour
     int scoreP1, scoreP2;
     Text scoreUIP1, scoreUIP2, txPemenang;
     GameObject panelSelesai;
+    AudioSource audio;
+    public AudioClip hitSound;
+
     // Start is called before the first frame update
     void Start()
     {
+        audio = GetComponent<AudioSource>();
+
         scoreP1 = 0;
         scoreP2 = 0;
 
@@ -35,6 +40,7 @@ public class BallController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        audio.PlayOneShot(hitSound);
         if (collision.gameObject.name == "Pemukul1" || collision.gameObject.name == ("Pemukul2"))
         {
             float sudut = (transform.position.y - collision.transform.position.y)*5f;
